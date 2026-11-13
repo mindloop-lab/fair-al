@@ -100,7 +100,7 @@ def r1a_tables(out: Path, contrasts: pd.DataFrame) -> list[str]:
     (out / "R1A_strong_baselines.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     made.append("R1A_strong_baselines.md")
 
-    # the one limited advantage the reviewer accepted
+    # Export the ABIDE-B/SVM Pareto-versus-quota contrast.
     key = contrasts[(contrasts.analysis_id.astype(str) ==
                      "R1A|ABIDE_B|svm|balanced_accuracy|baal-quota")]
     if len(key) == 1:

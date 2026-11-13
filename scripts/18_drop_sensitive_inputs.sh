@@ -33,4 +33,4 @@ done
 
 echo "sensitive-attribute removal runs written to $OUT_DIR"
 echo "Report: Q-Bias and balanced accuracy vs the same arms WITHOUT the ablation."
-echo "Do not pre-commit to the claim that results are unchanged."
+echo "Summarize paired changes across the saved seeds."

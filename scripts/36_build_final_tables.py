@@ -50,7 +50,7 @@ def build_plan(manifest: pd.DataFrame) -> pd.DataFrame:
 
 
 def probe_guards(out_dir: Path, tmp: Path) -> pd.DataFrame:
-    """Reproduce the three reviewer probes plus extra rejection cases."""
+    """Reproduce the three pairing validation cases plus extra rejection cases."""
     rng = np.random.default_rng(0)
     rows = []
 

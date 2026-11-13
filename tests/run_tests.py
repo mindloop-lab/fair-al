@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run the package tests and report passed / skipped / failed honestly.
+"""Run the package tests and report passed / skipped / failed counts.
 
 Data-dependent tests skip (with a reason) when FAIRAL_DATA_DIR or FAIRAL_FROZEN_DIR is
 absent.  A run with skips is NOT reported as a full regression pass.

@@ -2,9 +2,10 @@
 
 ## Withheld
 `src/baalexp/deepasd_*.py` - adapters around the DeepASD authors' code; the upstream
-licence could not be verified for redistribution.  Only needed for `--backend deepasd`;
-every manuscript result uses the sklearn backend.  Obtain DeepASD from its authors and
-supply the adapter yourself.
+licence could not be verified for redistribution.  Only needed for `--backend deepasd`.
+The core FAIR-AL acquisition experiments distributed in this package use the sklearn
+backend. Separate DeepASD reference analyses and adapters are outside this distribution.
+Obtain DeepASD from its authors and supply the adapter yourself.
 
 `src/baalexp/fal_cur_legacy.py` is retained because `strategies.py` imports it at module
 scope.  It is marked SUPERSEDED, and no reported number uses it.

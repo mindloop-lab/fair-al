@@ -1,106 +1,60 @@
 # FAIR-AL
 
 **FAIR-AL: A reproducible active-learning framework for auditing demographic query drift in
-feature-based ASD screening**
+feature-based ASD screening** — manuscript CMPB-D-26-04362 (revision 1), *Computer Methods and
+Programs in Biomedicine*.
 
-Manuscript CMPB-D-26-04362 (revision 1), *Computer Methods and Programs in Biomedicine*.
+Reference implementation: acquisition rules, the strict paired-comparison core, and the table
+builders. No participant-level data, no checkpoints, no per-run result records.
 
-This repository is the reference implementation: the acquisition rules, the strict
-paired-comparison statistics and the table builders behind the revision. It is a **code
-repository**. It contains no participant-level data, no model checkpoints and no per-run
-result records — see "What is published where" below for exactly what exists and what does
-not.
-
-## Repository name, version and identifiers
-
-| Item | Value |
+| | |
 |---|---|
-| Repository URL | `https://github.com/mindloop-lab/fair-al` |
-| Previous repository name | `mindloop-lab/fair-al-cmpb-26-04362` |
-| GitHub repository ID (unchanged by a rename) | 1456286167 |
-| Release identifier | `cmpb-rev1-v1.0.1` |
-| Preceding, superseded release | `cmpb-rev1-v1` (kept, not deleted) |
-| Python package version (`pyproject.toml`) | 0.8.0 |
+| Repository | `https://github.com/mindloop-lab/fair-al` (ID 1456286167) |
+| Verified release | [`cmpb-rev1-v1.0.1`](https://github.com/mindloop-lab/fair-al/releases/tag/cmpb-rev1-v1.0.1) |
+| Code archive | `fair-al-cmpb-26-04362-cmpb-rev1-v1.0.1.zip` (214 558 B, `aa49cc0a…7d27`) |
+| Results archive | `fair-al-results-evidence-cmpb-rev1-v1.0.1.zip` (460 989 B, `3f81bacd…3ce0`) |
+| Package version | 0.8.0 (`pyproject.toml`) |
 
-The package version, the release tag and the repository name are three different identifiers
-and are tracked separately here. The manuscript number CMPB-D-26-04362 is kept for provenance;
-it is deliberately not the long-term repository name.
-
-## What this code does
-
-FAIR-AL audits *demographic query drift*: the change in the protected- or proxy-group
-composition of the cohort an active-learning rule chooses to annotate, measured by a
-Total-Variation Q-Bias between the cumulative queried distribution and a target distribution.
-Four acquisition families are implemented — uncertainty, Pareto (FAIR-AL-Pareto), weighted
-scalarisation (FAIR-AL-Weighted) and constrained with entropy fallback (FAIR-AL-Constrained) —
-plus strong composition controls (quota, stratified uncertainty) and the adapted FAL-CUR arm.
-
-The paper's claims are about the *acquisition process*, not about diagnostic sensitivity of a
-downstream model. Nothing here establishes clinical validity.
-
-## What is published where
-
-| Artefact | Where | Contents | Licence |
-|---|---|---|---|
-| Code repository | this Git tree | `src/`, `scripts/`, `tests/`, `tools/`, `configs/`, `plan/`, documentation | Apache-2.0 |
-| Results evidence (release asset) | `fair-al-results-evidence-cmpb-rev1-v1.0.1.zip` attached to the release | 14 aggregate CSV summaries: per-comparison and per-seed endpoints, per-query aggregate trajectories, and their schema/provenance documents | CC BY 4.0 |
-| Full per-run result tree | **not distributed** | every seed's raw output records, training curves, ablation inputs | — |
-| ABIDE feature files, labels, split and selection indices, per-subject predictions | **not distributed** | restricted by the ABIDE data-use terms; the authors cannot relicense them | — |
-| Figure 1 source | **not distributed** | edited vector graphic held by the authors | — |
-
-So "no result records" would be wrong: aggregate summaries of the results are published as a
-release asset. What is *not* published is the per-run tree and everything derived
-subject-by-subject.
-
-## Layout
-
-    src/baalexp/      acquisition rules, backends, metrics, strict pairing core, statistics
-    tests/            plain-assert tests; run_tests.py reports passed / skipped / failed
-    scripts/          experiment drivers and table builders
-    tools/            synthetic-data generator, data-free smoke runner
-    configs/          run configuration records
-    plan/             the declared 514-comparison plan (comparisons_manifest.csv)
-
-    pyproject.toml            package metadata (version 0.8.0)
-    requirements-tested.txt   the exact set this tree was verified with (start here)
-    ENVIRONMENTS.md           submission-era, revision-era and tested environments
-    uv.lock                   submission-era lock — historical, NOT the tested set
-    LICENSE  NOTICE           Apache-2.0 text and copyright statement
-    LICENCE_DATA.md           CC BY 4.0 statement for the results-evidence asset (inside that asset)
-
-## Three different things people mean by "reproduce"
-
-| Path | Needs | Command | What you get |
-|---|---|---|---|
-| **A. Synthetic smoke** | nothing | `python tools/run_smoke_synthetic.py` | 32/32 checks on generated data: five rules, one seed, index bounds, cross-round uniqueness, fallback counters, Q-Bias range. Reproduces no published number. |
-| **B. Re-run an experiment** | authorised ABIDE-derived feature files (`DATA_ACCESS.md`) | `python -m baalexp.run_experiment ...` (below) | New result CSVs for your own seeds. Restores capability, not the published numbers: the published runs used seeds 0–9, budget 120, initial 40, batch 10. |
-| **C. Rebuild the paper tables** | the per-run result records (`results_as_submitted/`, `results_rev1/formal/`) | `python scripts/36_build_final_tables.py --plan plan/comparisons_manifest.csv --out out/` then `python scripts/37_build_support_tables.py --out out/` | The contrast, family-ledger and support tables, recomputed from the stored per-comparison endpoints. |
-
-Two limits are worth stating plainly:
-
-- Downloading this repository does **not** reproduce the paper's results. Path C needs the
-  per-run result records, which are not published; path B needs the feature files, which the
-  authors cannot redistribute.
-- The results-evidence asset includes paired endpoint values and aggregate per-query
-  trajectories. These support independent recomputation of the released paired-comparison
-  statistics and process-drift integrals. They are not a replacement for the full per-run
-  input tree expected by `36`/`37`, and those scripts do not accept the evidence ZIP directly.
-  Complete experiment reruns and regeneration of all manuscript artifacts require additional
-  authorized inputs. Recomputing statistics from released values does not validate the
-  original training runs that produced those values.
-
-`REPRODUCIBILITY.md` states exactly what each path can and cannot establish.
+`main` carries documentation and comment cleanup on top of that tag; the code path is identical.
+Cite the release, not a moving branch.
 
 ## Quick start (no restricted data)
 
     python -m venv .venv && . .venv/bin/activate
     pip install -r requirements-tested.txt
     export PYTHONPATH=src
-    python tools/run_smoke_synthetic.py     # expects: checks passed: 32/32
-    python tests/run_tests.py               # expects: passed=18 skipped=4 failed=0
+    python tools/run_smoke_synthetic.py     # checks passed: 32/32
+    python tests/run_tests.py               # passed=18 skipped=4 failed=0
 
-The four skips are the data-dependent tests; they skip with an explicit reason and are not
-evidence of a passing regression.
+The four skips are the data-dependent tests; a skip is not a pass.
+
+## Data and results
+
+| Artefact | Where | Licence |
+|---|---|---|
+| Code, scripts, tests, plan, documentation | this repository | Apache-2.0 |
+| 14 aggregate result CSVs + schema/provenance | `fair-al-results-evidence-…-v1.0.1.zip` release asset | CC BY 4.0 |
+| Per-run result records | not distributed | — |
+| ABIDE features, labels, split/selection indices, per-subject predictions | not distributed (ABIDE data-use terms) | — |
+| Figure 1 source | not distributed | — |
+
+See `DATA_ACCESS.md` for what a user must supply themselves.
+
+## Reproduction scope
+
+| Path | Needs | Establishes |
+|---|---|---|
+| **A. Synthetic smoke** | nothing | the acquisition machinery runs, its invariants hold; no reported number |
+| **B. Re-run an experiment** | authorised ABIDE-derived feature files | capability on your own seeds; not the published numbers |
+| **C. Rebuild the tables** | the per-run result records | the reported contrasts recomputed from stored endpoints |
+
+The fourteen aggregate CSVs contain paired endpoint values and aggregate per-query trajectories.
+They support independent recomputation of the released paired-comparison statistics and the
+process-drift integrals; they do **not** replace the per-run input tree that `scripts/36` and
+`scripts/37` expect, and downloading the repository does not reproduce the paper's results.
+
+`REPRODUCIBILITY.md` states exactly what each path can and cannot establish; `ENVIRONMENTS.md`
+records the submission-era, revision-era and tested environments.
 
 ## Re-running an experiment
 
@@ -111,74 +65,30 @@ evidence of a passing regression.
         --k-candidates 200 --lambda-weight 0.5 --epsilon 0.03 \
         --output results/ABIDE_A_lr_core.csv --save-history
 
-ABIDE-B additionally needs `--sensitive-index 46` (zero-based). Column 46 and column 47 are
-exact complements; the pair defines a binary proxy group whose clinical meaning has **not**
-been verified against a data dictionary. See `DATA_ACCESS.md`.
+ABIDE-B additionally needs `--sensitive-index 46` (zero-based). Columns 46 and 47 are exact
+complements and define a binary proxy group whose clinical meaning is unverified; ABIDE-B results
+are proxy-group analyses, not sex-specific clinical fairness evidence.
 
-## Building the tables (needs the authorised result records)
+## Notes
 
-    export FAIRAL_CODE_ROOT=/path/to/this/tree-with-results   # must hold results_rev1/
-    export FAIRAL_PROJECT_ROOT=/path/to/project               # holds results_as_submitted/
-    export PYTHONPATH=$FAIRAL_CODE_ROOT/src
-    python scripts/36_build_final_tables.py --plan plan/comparisons_manifest.csv --out out/
-    python scripts/37_build_support_tables.py --out out/
-
-Pass `--plan` explicitly: `36` otherwise looks for
-`<code root>/results_rev1/stat/comparisons_manifest.csv`. Its strict comparison entry point
-rejects missing declared sources rather than silently reducing the comparison set. The
-support-table builder `37` has its own input requirements; do not interpret the availability
-of released summaries as proof that its full input tree is included.
-
-`36` writes `comparison_endpoint_pairs.csv` (514 × 10 = 5140 rows), `05_CONTRASTS_FINAL.csv`,
-`06_FAMILY_LEDGER.csv`, `guard_probes.csv` and `verification.json`. A complete run reports
-`declared = evaluated_ok = 514`, `98` statistical families, `418` testable contrasts and `96`
-zero-variance contrasts; `wc -l out/comparison_endpoint_pairs.csv` gives 5141 lines including
-the header.
-
-`scripts/26_make_revision_tables.py` is the **legacy** statistics path from an earlier
-revision round. It is kept for provenance only: its results differ from `36` wherever the
-earlier loader is used, and it is not an authoritative entry point. Use `36`/`37`.
-
-## Sensitivity switch (off by default, exploratory only)
-
-    --fal-cur-cluster-drop-sensitive
-
-With the flag on, the two group-encoding columns are replaced by their own column mean before
-the distance computations used by the FAL-CUR acquisition rule. Both the fair-clustering
-assignment **and** the within-cluster representativeness term use that matrix, so the group
-encoding is neutralised in both; the predictor input, the group penalty, the train/test
-splits, the initial labelled set, the budget, the batch size and the seeds are unchanged. The
-flag is refused together with `--drop-sensitive-inputs`, which removes the columns from the
-predictor as well — a different intervention.
-
-The flag is off for the main FAL-CUR comparisons and on for the separately reported D4
-exploratory sensitivity runs. D4 is outside the declared 514-comparison plan. Its released
-summary provides nominal confidence intervals and raw p-values. Any Holm check across the
-eight outcomes in each D4 setting is exploratory and separate from the declared comparison
-families. Non-significance is not evidence of equivalence or absence of an effect.
-
-## Figure 1
-
-`scripts/33_make_framework_figure.py` generates an **early alternative** of the framework
-schematic, not the figure in the current manuscript. The manuscript figure is an edited
-vector graphic; `scripts/33` is shipped only so the underlying layout is documented. Do not
-use it to claim reproduction of Figure 1.
+- `scripts/26_make_revision_tables.py` is the legacy statistics path; use `36`/`37`.
+- The `--fal-cur-cluster-drop-sensitive` switch backs the separately reported D4 exploratory
+  analysis (off for the main comparisons, on for D4). D4 is outside the declared 514 comparison
+  plan; its intervals are nominal and its Holm check across eight outcomes is exploratory.
+- `scripts/33_make_framework_figure.py` draws an early alternative schematic, not the manuscript's
+  Figure 1.
+- `plan/comparisons_manifest.csv` is frozen; `FAL_CUR_NOTES.md` explains its vocabulary without
+  changing it.
 
 ## Licence
 
-The code, scripts, tests, tools, configuration, plan and the documentation in this repository
-are licensed under the **Apache License 2.0**: the full text is in `LICENSE` and the copyright
-statement is in `NOTICE` (copyright 2026 Zongqing Chen, Chongqing Normal University,
-Chongqing, China).
-
-The fourteen aggregate result CSVs and their documentation, distributed as the
-`fair-al-results-evidence-cmpb-rev1-v1.0.1.zip` release asset, are licensed under
-**CC BY 4.0**; `LICENCE_DATA.md` inside that asset states the terms and the scope.
-
-Neither licence extends to ABIDE or to any ABIDE-derived feature table: those remain subject
-to the ABIDE data-use terms and are not distributed here.
+Code, scripts, tests, configuration, plan and documentation: **Apache-2.0** — full text in
+`LICENSE`, copyright statement in `NOTICE` (copyright 2026 Zongqing Chen, Chongqing Normal
+University, Chongqing, China). The fourteen aggregate CSVs and their documentation: **CC BY 4.0**,
+stated in `LICENCE_DATA.md` inside that asset. Neither licence extends to ABIDE or to any
+ABIDE-derived feature table.
 
 ## Citation
 
-`CITATION.cff` carries the title, author list, licence and version. Please cite the manuscript
-once it is published; no DOI is asserted here because none has been minted.
+`CITATION.cff` carries title, authors, licence and version. Cite the article; no DOI is asserted
+here because none has been minted.
