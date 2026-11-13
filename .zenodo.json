@@ -60,5 +60,5 @@
       "scheme": "other"
     }
   ],
-  "notes": "Code: Apache-2.0. The fourteen aggregate result CSVs distributed as a release asset: CC BY 4.0. ABIDE-derived feature tables are not redistributed."
+  "notes": "Code: Apache-2.0. The fourteen aggregate result CSVs distributed as a release asset: CC BY 4.0. ABIDE-derived feature tables are not redistributed. Source repository and release: https://github.com/mindloop-lab/fair-al/releases/tag/cmpb-rev1-v1.0.1"
 }
