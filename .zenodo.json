@@ -1,0 +1,64 @@
+{
+  "title": "FAIR-AL: A reproducible active-learning framework for auditing demographic query drift in feature-based ASD screening",
+  "upload_type": "software",
+  "publication_date": "2026-11-13",
+  "version": "cmpb-rev1-v1.0.1",
+  "language": "eng",
+  "license": "Apache-2.0",
+  "access_right": "open",
+  "description": "<p>Reference implementation for the revision of manuscript CMPB-D-26-04362 (Computer Methods and Programs in Biomedicine).</p><p>FAIR-AL audits <em>demographic query drift</em>: the change in the protected- or proxy-group composition of the cohort an active-learning rule chooses to annotate, measured by a Total-Variation Q-Bias between the cumulative queried distribution and a target distribution. The package contains four acquisition families (uncertainty, Pareto, weighted scalarisation, constrained with entropy fallback), strong composition controls, an adapted FAL-CUR arm, the strict paired-comparison core and the table builders, together with the declared 514-comparison plan.</p><p>The code is released under Apache-2.0. Fourteen aggregate result CSVs (paired endpoint values and aggregate per-query trajectories) plus their schema and provenance are distributed as a separate release asset under CC BY 4.0. Neither licence extends to ABIDE or to any ABIDE-derived feature table, which remain subject to the ABIDE data-use terms and are not redistributed. Per-run result records, per-subject predictions and the Figure 1 source are not distributed.</p><p>This record is a software archive. It is not the article and it does not assert that the article is published.</p>",
+  "creators": [
+    {
+      "name": "Chen, Zongqing",
+      "affiliation": "School of Mathematical Sciences, Chongqing Normal University, Chongqing, China"
+    },
+    {
+      "name": "Jiang, Dandan",
+      "affiliation": "School of Mathematical Sciences, Chongqing Normal University, Chongqing, China"
+    },
+    {
+      "name": "Zhang, Fanghong",
+      "affiliation": "School of Mathematical Sciences, Chongqing Normal University, Chongqing, China"
+    },
+    {
+      "name": "Liu, Guixian",
+      "affiliation": "Tianjin Chengjian University, Tianjin, China"
+    },
+    {
+      "name": "Yu, Biantian",
+      "affiliation": "School of Mathematical Sciences, Chongqing Normal University, Chongqing, China"
+    },
+    {
+      "name": "Jiang, Yuxia",
+      "affiliation": "School of Mathematical Sciences, Chongqing Normal University, Chongqing, China"
+    },
+    {
+      "name": "Xu, Ximing",
+      "affiliation": "Children's Hospital of Chongqing Medical University, Chongqing, China"
+    },
+    {
+      "name": "Zhong, Ning",
+      "affiliation": "Maebashi Institute of Technology, Maebashi, Japan"
+    },
+    {
+      "name": "Kuai, Hongzhi",
+      "affiliation": "Chongqing University of Posts and Telecommunications, Chongqing, China"
+    }
+  ],
+  "keywords": [
+    "active learning",
+    "demographic query drift",
+    "fair machine learning",
+    "autism spectrum disorder screening",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementTo",
+      "identifier": "CMPB-D-26-04362",
+      "resource_type": "publication-article",
+      "scheme": "other"
+    }
+  ],
+  "notes": "Code: Apache-2.0. The fourteen aggregate result CSVs distributed as a release asset: CC BY 4.0. ABIDE-derived feature tables are not redistributed."
+}
