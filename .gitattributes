@@ -1,0 +1,32 @@
+# Line-ending and binary policy for this repository.
+#
+# Publishing defect 001 of cmpb-rev1-v1: the host normalised CRLF to LF at commit time while
+# SHA256SUMS had been computed on the CRLF working tree, so two files failed their own sums in
+# a fresh clone.  The rule below makes the stored bytes explicit, so the checkout is the same
+# on any machine regardless of core.autocrlf.
+
+* text=auto eol=lf
+
+*.py    text eol=lf
+*.md    text eol=lf
+*.csv   text eol=lf
+*.json  text eol=lf
+*.cff   text eol=lf
+*.toml  text eol=lf
+*.txt   text eol=lf
+*.sh    text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.cfg   text eol=lf
+*.ini   text eol=lf
+LICENSE  text eol=lf
+NOTICE   text eol=lf
+
+*.zip  -text
+*.gz   -text
+*.png  -text
+*.jpg  -text
+*.pdf  -text
+*.npz  -text
+*.npy  -text
+*.pkl  -text

@@ -6,11 +6,11 @@ abstract: >-
   Acquisition rules, strict paired-comparison statistics and table builders for the
   revision of manuscript CMPB-D-26-04362. The code audits and controls demographic
   query drift in active learning over feature-based autism screening data; it contains no
-  participant-level data.
-version: "0.8.0"
+  participant-level data. Python package version 0.8.0; release tag cmpb-rev1-v1.0.1.
+version: "cmpb-rev1-v1.0.1"
 date-released: "2026-11-13"
-repository-code: "https://github.com/mindloop-lab/fair-al-cmpb-26-04362"
-url: "https://github.com/mindloop-lab/fair-al-cmpb-26-04362"
+repository-code: "https://github.com/mindloop-lab/fair-al"
+url: "https://github.com/mindloop-lab/fair-al"
 license: Apache-2.0
 keywords:
   - active learning

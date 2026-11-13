@@ -1,15 +1,30 @@
-# FAIR-AL — reference code for
+# FAIR-AL
 
 **FAIR-AL: A reproducible active-learning framework for auditing demographic query drift in
-feature-based ASD screening** (manuscript CMPB-D-26-04362, revision 1).
+feature-based ASD screening**
 
-This repository contains the acquisition rules, the strict paired-comparison statistics and
-the table builders behind the revision. It contains **no participant-level data** and **no
-result records**: the derived ABIDE feature files cannot be redistributed by the authors
-(see `DATA_ACCESS.md`).
+Manuscript CMPB-D-26-04362 (revision 1), *Computer Methods and Programs in Biomedicine*.
 
-> **Licence: pending an author decision.** No open-source licence has been granted yet, so
-> this tree is not licensed for reuse or redistribution. See "Licence status" below.
+This repository is the reference implementation: the acquisition rules, the strict
+paired-comparison statistics and the table builders behind the revision. It is a **code
+repository**. It contains no participant-level data, no model checkpoints and no per-run
+result records — see "What is published where" below for exactly what exists and what does
+not.
+
+## Repository name, version and identifiers
+
+| Item | Value |
+|---|---|
+| Planned repository URL | `https://github.com/mindloop-lab/fair-al` |
+| Previous name (still live until the rename is executed) | `mindloop-lab/fair-al-cmpb-26-04362` |
+| GitHub repository ID (unchanged by a rename) | 1456286167 |
+| Release tag this tree is cut from | `cmpb-rev1-v1.0.1` |
+| Preceding, superseded release | `cmpb-rev1-v1` (kept, not deleted) |
+| Python package version (`pyproject.toml`) | 0.8.0 |
+
+The package version, the release tag and the repository name are three different identifiers
+and are tracked separately here. The manuscript number CMPB-D-26-04362 is kept for provenance;
+it is deliberately not the long-term repository name.
 
 ## What this code does
 
@@ -22,6 +37,20 @@ plus strong composition controls (quota, stratified uncertainty) and the adapted
 
 The paper's claims are about the *acquisition process*, not about diagnostic sensitivity of a
 downstream model. Nothing here establishes clinical validity.
+
+## What is published where
+
+| Artefact | Where | Contents | Licence |
+|---|---|---|---|
+| Code repository | this Git tree | `src/`, `scripts/`, `tests/`, `tools/`, `configs/`, `plan/`, documentation | Apache-2.0 |
+| Results evidence (release asset) | `fair-al-results-evidence-cmpb-rev1-v1.0.1.zip` attached to the release | 14 aggregate CSV summaries: per-comparison and per-seed endpoints, per-query aggregate trajectories, and their schema/provenance documents | CC BY 4.0 |
+| Full per-run result tree | **not distributed** | every seed's raw output records, training curves, ablation inputs | — |
+| ABIDE feature files, labels, split and selection indices, per-subject predictions | **not distributed** | restricted by the ABIDE data-use terms; the authors cannot relicense them | — |
+| Figure 1 source | **not distributed** | edited vector graphic held by the authors | — |
+
+So "no result records" would be wrong: aggregate summaries of the results are published as a
+release asset. What is *not* published is the per-run tree and everything derived
+subject-by-subject.
 
 ## Layout
 
@@ -36,6 +65,8 @@ downstream model. Nothing here establishes clinical validity.
     requirements-tested.txt   the exact set this tree was verified with (start here)
     ENVIRONMENTS.md           submission-era, revision-era and tested environments
     uv.lock                   submission-era lock — historical, NOT the tested set
+    LICENSE  NOTICE           Apache-2.0 text and copyright statement
+    LICENCE_DATA.md           CC BY 4.0 statement for the results-evidence asset (inside that asset)
 
 ## Three different things people mean by "reproduce"
 
@@ -43,12 +74,18 @@ downstream model. Nothing here establishes clinical validity.
 |---|---|---|---|
 | **A. Synthetic smoke** | nothing | `python tools/run_smoke_synthetic.py` | 32/32 checks on generated data: five rules, one seed, index bounds, cross-round uniqueness, fallback counters, Q-Bias range. Reproduces no published number. |
 | **B. Re-run an experiment** | authorised ABIDE-derived feature files (`DATA_ACCESS.md`) | `python -m baalexp.run_experiment ...` (below) | New result CSVs for your own seeds. Restores capability, not the published numbers: the published runs used seeds 0–9, budget 120, initial 40, batch 10. |
-| **C. Rebuild the paper tables** | the historical result records (`results_as_submitted/`, `results_rev1/formal/`) | `python scripts/36_build_final_tables.py --plan plan/comparisons_manifest.csv --out out/` then `python scripts/37_build_support_tables.py --out out/` | The contrast, family-ledger and support tables, recomputed from the stored per-comparison endpoints. |
+| **C. Rebuild the paper tables** | the per-run result records (`results_as_submitted/`, `results_rev1/formal/`) | `python scripts/36_build_final_tables.py --plan plan/comparisons_manifest.csv --out out/` then `python scripts/37_build_support_tables.py --out out/` | The contrast, family-ledger and support tables, recomputed from the stored per-comparison endpoints. |
 
-Downloading this repository does **not** reproduce the paper's full results. Path C needs the
-result records, which are not in this repository; path B needs the feature files, which the
-authors cannot redistribute. `REPRODUCIBILITY.md` states exactly what each path can and
-cannot establish.
+Two limits are worth stating plainly:
+
+- Downloading this repository does **not** reproduce the paper's results. Path C needs the
+  per-run result records, which are not published; path B needs the feature files, which the
+  authors cannot redistribute.
+- The 14 CSVs in the results-evidence asset are **aggregate endpoints, not per-run records**.
+  They document and can be cross-checked against the published tables, but they cannot be fed
+  to `36`/`37` to rebuild them.
+
+`REPRODUCIBILITY.md` states exactly what each path can and cannot establish.
 
 ## Quick start (no restricted data)
 
@@ -122,15 +159,19 @@ use it to claim reproduction of Figure 1.
 
 ## Licence
 
-The code, scripts and documentation in this repository are licensed under the **Apache
-License 2.0** (see `LICENSE`); copyright 2026 Zongqing Chen, Chongqing Normal University, Chongqing, China, recorded in `NOTICE`.
+The code, scripts, tests, tools, configuration, plan and the documentation in this repository
+are licensed under the **Apache License 2.0**: the full text is in `LICENSE` and the copyright
+statement is in `NOTICE` (copyright 2026 Zongqing Chen, Chongqing Normal University,
+Chongqing, China).
 
-The fourteen aggregate result CSVs and their documentation, published as a release asset, are
-licensed under **CC BY 4.0** (see `LICENCE_DATA.md` in that directory). That licence covers the
-aggregate files only: it does not extend to ABIDE or to any ABIDE-derived feature table, which
-remain subject to the ABIDE data-use terms.
+The fourteen aggregate result CSVs and their documentation, distributed as the
+`fair-al-results-evidence-cmpb-rev1-v1.0.1.zip` release asset, are licensed under
+**CC BY 4.0**; `LICENCE_DATA.md` inside that asset states the terms and the scope.
+
+Neither licence extends to ABIDE or to any ABIDE-derived feature table: those remain subject
+to the ABIDE data-use terms and are not distributed here.
 
 ## Citation
 
-`CITATION.cff` carries the title, author list and version. Please cite the manuscript once it
-is published; the DOI is intentionally left unset rather than invented.
+`CITATION.cff` carries the title, author list, licence and version. Please cite the manuscript
+once it is published; no DOI is asserted here because none has been minted.
