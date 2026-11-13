@@ -1,0 +1,53 @@
+{
+  "release_tag_suggested": "cmpb-rev1-v1",
+  "release_date": "2026-11-13",
+  "package_version": "0.8.0",
+  "source_repository_commit": "1f02e326f2c4a1761a2179d952a85a647f272a49",
+  "source_branch": "workflow/public-release-prep",
+  "code_files_unchanged_since": "70ef6b5 (the commit whose tree passed the 2026-11-12 acceptance; later commits add release documents only)",
+  "input_reviewer_package": {
+    "name": "FAIRAL_code_reviewer_candidate_v4.zip",
+    "sha256": "bec22cac0f54d84e506f373f68a03665d41b451f9eb9b046f47b4d733c52afe8",
+    "bytes": 203823
+  },
+  "input_submission_prep": {
+    "name": "FAIRAL_CMPB_SUBMISSION_PREP_20261113_FIG1.zip",
+    "sha256": "c56019934a4c58a65d6d631a47bfabbbe41beac3f90b3fecabdd97e6458c43df",
+    "bytes": 3688491
+  },
+  "code_files_identical_to_v4": 47,
+  "documents_replaced": [
+    "CHANGES_V4.md",
+    "LICENSE_PENDING.md",
+    "MANIFEST.csv",
+    "README.md",
+    "SHA256SUMS"
+  ],
+  "documents_added": [
+    "CITATION.cff",
+    "CHANGELOG.md",
+    "REPRODUCIBILITY.md",
+    "RELEASE_NOTES.md",
+    ".gitignore",
+    "RELEASE_IDENTITY.json"
+  ],
+  "source_files_changed": [],
+  "python_files": 34,
+  "python_files_unparsable": [],
+  "declared_comparisons": 514,
+  "distribution_authorized": true,
+  "license": "Apache-2.0 (code); CC BY 4.0 (results evidence attachment)",
+  "licence_note": "code and documentation under Apache-2.0; the fourteen aggregate result CSVs and their documentation under CC BY 4.0; ABIDE-derived feature tables are not redistributed",
+  "identifiers": {
+    "doi": null,
+    "zenodo_record": null,
+    "github_repository": "https://github.com/mindloop-lab/fair-al-cmpb-26-04362"
+  },
+  "counts": {
+    "files": 59,
+    "bytes": 796623,
+    "archive": "fair-al-cmpb-26-04362-cmpb-rev1-v1.zip",
+    "sha256_note": "recorded in <archive>.sha256 next to the archive"
+  },
+  "copyright_holder": "Zongqing Chen, Chongqing Normal University, Chongqing, China"
+}

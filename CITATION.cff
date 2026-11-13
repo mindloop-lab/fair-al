@@ -1,0 +1,64 @@
+cff-version: 1.2.0
+message: "If you use this software, cite the associated article."
+type: software
+title: "FAIR-AL: reference implementation for auditing demographic query drift in feature-based ASD screening"
+abstract: >-
+  Acquisition rules, strict paired-comparison statistics and table builders for the
+  revision of manuscript CMPB-D-26-04362. The code audits and controls demographic
+  query drift in active learning over feature-based autism screening data; it contains no
+  participant-level data.
+version: "0.8.0"
+date-released: "2026-11-13"
+repository-code: "https://github.com/mindloop-lab/fair-al-cmpb-26-04362"
+url: "https://github.com/mindloop-lab/fair-al-cmpb-26-04362"
+license: Apache-2.0
+keywords:
+  - active learning
+  - demographic query drift
+  - fair machine learning
+  - autism spectrum disorder screening
+  - reproducibility
+authors:
+  - family-names: "Chen"
+    given-names: "Zongqing"
+  - family-names: "Jiang"
+    given-names: "Dandan"
+  - family-names: "Zhang"
+    given-names: "Fanghong"
+  - family-names: "Liu"
+    given-names: "Guixian"
+  - family-names: "Yu"
+    given-names: "Biantian"
+  - family-names: "Jiang"
+    given-names: "Yuxia"
+  - family-names: "Xu"
+    given-names: "Ximing"
+  - family-names: "Zhong"
+    given-names: "Ning"
+  - family-names: "Kuai"
+    given-names: "Hongzhi"
+preferred-citation:
+  type: article
+  title: "FAIR-AL: A reproducible active-learning framework for auditing demographic query drift in feature-based ASD screening"
+  authors:
+    - family-names: "Chen"
+      given-names: "Zongqing"
+    - family-names: "Jiang"
+      given-names: "Dandan"
+    - family-names: "Zhang"
+      given-names: "Fanghong"
+    - family-names: "Liu"
+      given-names: "Guixian"
+    - family-names: "Yu"
+      given-names: "Biantian"
+    - family-names: "Jiang"
+      given-names: "Yuxia"
+    - family-names: "Xu"
+      given-names: "Ximing"
+    - family-names: "Zhong"
+      given-names: "Ning"
+    - family-names: "Kuai"
+      given-names: "Hongzhi"
+  journal: "Computer Methods and Programs in Biomedicine"
+  year: 2026
+  status: submitted

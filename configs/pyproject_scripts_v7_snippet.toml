@@ -1,0 +1,25 @@
+
+[project.scripts]
+fairal-run = "baalexp.run_experiment:main"
+fairal-check-data = "baalexp.check_data:main"
+fairal-analyze = "baalexp.analyze_results:main"
+fairal-validate = "baalexp.validate_results:main"
+fairal-collect-summary = "baalexp.collect_summary:main"
+fairal-make-paper-artifacts = "baalexp.make_paper_artifacts:main"
+fairal-compare-history = "baalexp.compare_history:main"
+fairal-paper-artifacts = "baalexp.paper_figures_tables:main"
+fairal-convert-qbias = "baalexp.qbias_scale_results:main"
+
+baal-run = "baalexp.run_experiment:main"
+baal-check-data = "baalexp.check_data:main"
+baal-analyze = "baalexp.analyze_results:main"
+baal-validate = "baalexp.validate_results:main"
+baal-collect-summary = "baalexp.collect_summary:main"
+baal-make-paper-artifacts = "baalexp.make_paper_artifacts:main"
+baal-compare-history = "baalexp.compare_history:main"
+baal-paper-artifacts = "baalexp.paper_figures_tables:main"
+baal-convert-qbias = "baalexp.qbias_scale_results:main"
+
+deepasd-static-sex = "baalexp.deepasd_static_sex_bias:main"
+deepasd-uncertainty-sex = "baalexp.deepasd_uncertainty_sex_analysis:main"
+

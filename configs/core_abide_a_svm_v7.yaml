@@ -1,0 +1,24 @@
+
+# FAIR-AL v7 example configuration for the ABIDE-A SVM core experiment.
+data_dir: data
+dataset: ABIDE_A
+backend: sklearn
+classifier: svm
+strategies:
+  - random
+  - uncertainty
+  - reweighting
+  - heuristic
+  - coreset
+  - badge
+  - fairal_pareto
+  - fairal_constrained
+  - fairal_weighted
+  - fairal_random_pareto
+seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+initial_size: 40
+budget: 120
+batch_size: 10
+k_candidates: 200
+output: results/ABIDE_A_svm_core_v7.csv
+

@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+.env
+
+# Local experiment output (never committed; see REPRODUCIBILITY.md path C)
+out/
+results/
+logs/
+
+# Editors and OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
