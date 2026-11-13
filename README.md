@@ -15,10 +15,10 @@ not.
 
 | Item | Value |
 |---|---|
-| Planned repository URL | `https://github.com/mindloop-lab/fair-al` |
-| Previous name (still live until the rename is executed) | `mindloop-lab/fair-al-cmpb-26-04362` |
+| Repository URL | `https://github.com/mindloop-lab/fair-al` |
+| Previous repository name | `mindloop-lab/fair-al-cmpb-26-04362` |
 | GitHub repository ID (unchanged by a rename) | 1456286167 |
-| Release tag this tree is cut from | `cmpb-rev1-v1.0.1` |
+| Release identifier | `cmpb-rev1-v1.0.1` |
 | Preceding, superseded release | `cmpb-rev1-v1` (kept, not deleted) |
 | Python package version (`pyproject.toml`) | 0.8.0 |
 
@@ -81,9 +81,13 @@ Two limits are worth stating plainly:
 - Downloading this repository does **not** reproduce the paper's results. Path C needs the
   per-run result records, which are not published; path B needs the feature files, which the
   authors cannot redistribute.
-- The 14 CSVs in the results-evidence asset are **aggregate endpoints, not per-run records**.
-  They document and can be cross-checked against the published tables, but they cannot be fed
-  to `36`/`37` to rebuild them.
+- The results-evidence asset includes paired endpoint values and aggregate per-query
+  trajectories. These support independent recomputation of the released paired-comparison
+  statistics and process-drift integrals. They are not a replacement for the full per-run
+  input tree expected by `36`/`37`, and those scripts do not accept the evidence ZIP directly.
+  Complete experiment reruns and regeneration of all manuscript artifacts require additional
+  authorized inputs. Recomputing statistics from released values does not validate the
+  original training runs that produced those values.
 
 `REPRODUCIBILITY.md` states exactly what each path can and cannot establish.
 
@@ -119,10 +123,11 @@ been verified against a data dictionary. See `DATA_ACCESS.md`.
     python scripts/36_build_final_tables.py --plan plan/comparisons_manifest.csv --out out/
     python scripts/37_build_support_tables.py --out out/
 
-`--plan` is required: `36` otherwise looks for
-`<code root>/results_rev1/stat/comparisons_manifest.csv`. Without the result records, both
-scripts exit non-zero with `comparison plan not found` / `source not found` rather than
-writing a partial table.
+Pass `--plan` explicitly: `36` otherwise looks for
+`<code root>/results_rev1/stat/comparisons_manifest.csv`. Its strict comparison entry point
+rejects missing declared sources rather than silently reducing the comparison set. The
+support-table builder `37` has its own input requirements; do not interpret the availability
+of released summaries as proof that its full input tree is included.
 
 `36` writes `comparison_endpoint_pairs.csv` (514 × 10 = 5140 rows), `05_CONTRASTS_FINAL.csv`,
 `06_FAMILY_LEDGER.csv`, `guard_probes.csv` and `verification.json`. A complete run reports
@@ -146,9 +151,11 @@ splits, the initial labelled set, the budget, the batch size and the seeds are u
 flag is refused together with `--drop-sensitive-inputs`, which removes the columns from the
 predictor as well — a different intervention.
 
-The flag is off in every reported number. It backs an exploratory sensitivity analysis that
-is **not** part of the declared 514-comparison plan and carries no multiplicity adjustment.
-The interval for the one setting it moves is reported as nominal and per-comparison.
+The flag is off for the main FAL-CUR comparisons and on for the separately reported D4
+exploratory sensitivity runs. D4 is outside the declared 514-comparison plan. Its released
+summary provides nominal confidence intervals and raw p-values. Any Holm check across the
+eight outcomes in each D4 setting is exploratory and separate from the declared comparison
+families. Non-significance is not evidence of equivalence or absence of an effect.
 
 ## Figure 1
 

@@ -1,10 +1,11 @@
-# Release notes — cmpb-rev1-v1.0.1 (draft, not yet published)
+# Release notes — cmpb-rev1-v1.0.1 (release-integrity correction)
 
 Reference code for the revision of *FAIR-AL: A reproducible active-learning framework for
 auditing demographic query drift in feature-based ASD screening* (manuscript CMPB-D-26-04362,
 revision 1).
 
-This release supersedes `cmpb-rev1-v1`, which stays published and unmodified. No scientific
+This release supersedes `cmpb-rev1-v1`. The old tag, commit and assets are retained; its
+release description receives an erratum and a link to this correction. No scientific
 result, statistic, plan entry or source file changes: the difference is packaging and
 licensing.
 
@@ -39,14 +40,18 @@ licensing.
 
 ## Assets
 
-- `fair-al-cmpb-rev1-v1.0.1.zip` — this code tree (Apache-2.0).
+- `fair-al-cmpb-26-04362-cmpb-rev1-v1.0.1.zip` — this code tree (Apache-2.0).
 - `fair-al-results-evidence-cmpb-rev1-v1.0.1.zip` — 14 aggregate result CSVs plus schema,
   provenance and licence documents (CC BY 4.0).
 
 ## Verification performed on these bytes
 
-Fresh clone of the release commit into a new directory; new Python 3.12.13 virtual environment;
-`pip install -r requirements-tested.txt`.
+For this correction, the candidate commit was cloned and the actual archive was extracted
+into new directories. Smoke and data-free tests used the previously tested Python 3.12.13
+environment, with imports verified to resolve inside the extracted candidate. No new
+dependency installation is claimed for this correction. Earlier clean-environment
+installation and authorized-data/table-building checks are historical evidence, reported
+separately in ENVIRONMENTS.md and the authors' acceptance records.
 
 - `sha256sum -c SHA256SUMS` in the fresh clone: all entries verify, under both
   `core.autocrlf=input` and `core.autocrlf=true` checkouts
@@ -61,8 +66,9 @@ content equality with the approved CSVs.
 
 - No participant-level data: no feature tables, labels, split or selection indices, per-subject
   predictions.
-- No per-run result records. The fourteen aggregate CSVs are endpoints, not inputs: they cannot
-  be fed to `36`/`37` to rebuild the tables. `REPRODUCIBILITY.md` explains the dependency.
+- No complete per-run result tree. The released endpoint pairs and trajectories support
+  independent statistical recomputation, but do not directly provide the full input layout
+  required by `36`/`37`. `REPRODUCIBILITY.md` explains this distinction.
 - No DeepASD adapters (upstream licence unverified) and not the FAL-CUR authors' script
   (`src/baalexp/fal_cur.py` is an adapted reimplementation).
 - No figure source for Figure 1.

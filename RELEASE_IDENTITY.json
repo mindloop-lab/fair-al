@@ -1,6 +1,6 @@
 {
   "release_tag": "cmpb-rev1-v1.0.1",
-  "release_status": "candidate — not published",
+  "release_status": "pre-publication build snapshot; consult the GitHub release for current publication status",
   "release_date": "2026-11-13",
   "supersedes": "cmpb-rev1-v1",
   "repository": {
@@ -36,13 +36,15 @@
     "not_covered": "ABIDE and every ABIDE-derived feature table, which remain subject to the ABIDE data-use terms and are not redistributed"
   },
   "verification": {
-    "code_files_identical_to_v4": 50,
+    "code_files_identical_to_v4": 46,
     "code_files_normalised_only": [
       "plan/comparisons_manifest.csv"
     ],
     "python_files": 34,
     "plan_rows": 514,
-    "text_files_normalised_to_lf": 1
+    "text_files_normalised_to_lf": 1,
+    "code_files_compared_with_v4": 47
   },
-  "distribution_authorized": true
+  "distribution_authorized": true,
+  "metadata_scope": "The repository rename and publication flags describe build time. Subsequent publication facts are recorded externally without moving an existing tag."
 }

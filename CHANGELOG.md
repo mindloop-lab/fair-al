@@ -3,7 +3,17 @@
 All entries concern packaging and documentation unless stated. No reported number, seed,
 split, budget or statistical family changed in any of these steps.
 
-## 2026-11-13 — public release candidate
+## 2026-11-13 — release-integrity correction (cmpb-rev1-v1.0.1)
+
+- Added the missing LICENSE and NOTICE to the committed and packaged file sets.
+- Added a repository-local LF policy; rebuilt file manifests and verified fresh checkouts.
+- Removed contradictory current licence statements and distinguished the code tree,
+  released summary data, and full per-run inputs.
+- Clarified that released endpoint pairs and trajectories support independent statistical
+  recomputation, while the full experiment/table-builder inputs are not included.
+- No acquisition, statistical, or training implementation changed.
+
+## 2026-11-13 — pre-publication preparation snapshot (historical)
 
 - Documentation re-cut for public reading: exact manuscript title, the three reproduction
   paths separated, environment entry point made explicit (`requirements-tested.txt` first,
@@ -15,8 +25,10 @@ split, budget or statistical family changed in any of these steps.
 - Figure provenance stated: `scripts/33` is an early alternative schematic, not the figure in
   the manuscript.
 - Added `CITATION.cff`, `REPRODUCIBILITY.md`, `RELEASE_IDENTITY.json`, `.gitignore`.
-- Removed from the public tree: `LICENSE_PENDING.md` (licence still undecided; the public
-  tree therefore ships **no** licence and says so), `CHANGES_V4.md` (superseded by this file).
+- In this preparation snapshot, `LICENSE_PENDING.md` was removed while the licence decision
+  was still pending, and no licence text was shipped. This is historical information, not
+  the current licence status: cmpb-rev1-v1.0.1 includes LICENSE and NOTICE. `CHANGES_V4.md`
+  was superseded by this file.
 - No source file changed.
 
 ## 2026-11-12 — reviewer candidate v4

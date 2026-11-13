@@ -1,77 +1,66 @@
-# Reproducibility statement
+# Reproducibility scope and verification provenance
 
-What each path in `README.md` can and cannot establish. Every claim below was executed on
-2026-11-13 from a fresh extraction of the release archive, in a new Python 3.12.13 virtual
-environment built from `requirements-tested.txt`. The acceptance log is
-`PUBLICATION_ACCEPTANCE.csv` in the review bundle; the raw logs are kept by the authors.
+This document separates capabilities, published evidence, and tests performed at different
+stages. Downloading the code is not equivalent to reproducing every manuscript artifact.
 
-## A. Synthetic smoke — PASS, no restricted input
+## A. Synthetic workflow and data-free tests
 
     python tools/run_smoke_synthetic.py
-
-Expected, and observed: `checks passed: 32/32`. The run generates a synthetic dataset,
-executes five acquisition rules for one seed, and asserts evaluation-point count, one history
-record per query event, Q-Bias within range, constrained fallback counters, cross-round
-uniqueness of selections, index bounds, and that every selection lies inside the training
-pool and outside the initial/validation/test sets.
-
-Establishes: the acquisition machinery runs and its internal invariants hold.
-Does **not** establish: any reported number, any comparison, any fairness conclusion.
-
-## A'. Data-free test suite — PASS with four explicit skips
-
     python tests/run_tests.py
 
-Observed: `passed=18 skipped=4 failed=0`. The four skips are the data-dependent tests; each
-names the environment variable it needs (`FAIRAL_DATA_DIR`, `FAIRAL_FROZEN_DIR`). Skips are
-reported as skips, never as passes.
+The authors measured 32/32 smoke checks and 18 passed / 4 skipped / 0 failed from the
+extracted v1.0.1 candidate using the previously tested Python 3.12.13 environment. Module
+resolution was checked inside that extraction. This correction did not perform a new
+dependency installation. The four skips require authorized data and frozen results;
+they are not evidence of a passing data-dependent regression.
 
-## B. Experiment re-run — capability only
+The synthetic workflow tests execution and selection containment on generated data.
+It does not reproduce a published biomedical result or establish a fairness conclusion.
 
-Needs authorised ABIDE-derived feature files. With them the same suite reports
-`passed=22 skipped=0 failed=0`; the authors observed exactly that on their authorised copy.
+## B. Experiments with authorized feature inputs
 
-Establishes: the pipeline runs end-to-end on the declared feature contract, and the loader
-enforces the column contract for both cohorts.
-Does **not** establish: the published numbers. Those came from seeds 0–9, budget 120,
-initial 40, batch 10, k-candidates 200, λ = 0.5, ε = 0.03 on files the authors held at a
-specific SHA-256; different files or seeds give different numbers by design.
+Experiment reruns require the documented ABIDE-derived feature contract and recorded
+protocol. The historical acceptance records separately report 22 passed / 0 skipped with
+authorized feature files. That check was not repeated in this packaging correction.
+The exact original per-run invocation arguments were not archived; defaults and runner
+records identify historical parameter settings with the limitations stated in the paper.
 
-## C. Table rebuild — PASS, needs the historical result records
+## C. Existing table-building entry points
 
     python scripts/36_build_final_tables.py --plan plan/comparisons_manifest.csv --out out/
     python scripts/37_build_support_tables.py --out out/
 
-Observed with the authors' authorised result records: `declared = evaluated_ok = 514`,
-`ids_match_manifest = true`, 5140 pair rows (5141 lines with the header), 98 families, 418
-testable contrasts, 96 zero-variance contrasts; the rebuilt tables match the frozen revision
-tables value for value (max |Δ| = 0.0 over 11 tables).
+These commands expect the full historical/revision input tree, which is not distributed
+in this code repository. Historical acceptance records report 514 comparisons, 5140 paired
+rows, 98 families, 418 testable contrasts and 96 zero-variance contrasts, with 11 rebuilt
+tables matching the frozen revision results. Those full-input checks are historical
+evidence, not new training or table-building runs in this correction.
 
-Establishes: the statistics in the paper follow mechanically from the stored per-comparison
-endpoints plus the declared plan.
-Does **not** establish: that the stored endpoints themselves are correct — that depends on
-the runs that produced them, whose environment is recorded in `ENVIRONMENTS.md`.
+## D. Independent recomputation from the released evidence
 
-The result records are not in this repository. The authors can supply them where the
-redistribution terms allow, or a reviewer can be given access through the journal.
+The results-evidence release asset includes comparison_endpoint_pairs.csv and the declared
+comparison plan. The endpoint pairs permit independent recomputation of the released
+paired means, differences, nominal confidence intervals, effect sizes and adjusted p-values,
+including the stated handling of zero-variance contrasts and comparison families.
 
-## What is deliberately not reproducible from this repository
+The asset also includes process_trajectory_points.csv. These aggregate per-query points
+permit recomputation of the released process-drift integrals and summaries. D4_pairs.csv
+similarly supports verification of the separately released exploratory D4 summaries.
 
-- **Figure 1** is an edited vector graphic; `scripts/33` produces an early alternative, not
-  the published figure.
-- **Figure regeneration** (`scripts/28`) needs `matplotlib` and the stored per-seed curves.
-- **D4 sensitivity analysis**: the switch and its documentation are here, and the archived
-  per-seed evidence was checked against it; the 20 paired runs are not re-executed here
-  because that analysis is not part of the declared comparison plan.
-- **DeepASD backend**: the adapter modules are withheld (upstream licence unverified), so
-  `--backend deepasd` will not run. Every reported number uses the sklearn backend.
-- **Process-level trajectory integrals**: the 5140-row paired table does not contain the
-  query-by-query trajectories; the trajectory points are a separate artefact.
+These files cannot be passed directly to the existing 36/37 commands as a substitute for
+their original input tree. Their availability does not imply that every table, plot,
+training curve or experiment can be rebuilt from the evidence ZIP alone. Recomputing
+statistics from stored values does not independently verify the original training runs.
 
-## Environment
+## E. Other limits
 
-`ENVIRONMENTS.md` lists three recordings: the frozen submission runs (numpy 2.3.5 / pandas
-3.0.3 / scipy 1.17.1 / scikit-learn 1.9.0), the revision runs (2.5.4 / 3.1.0 / 1.18.1 / 1.9.1)
-and the tested set in `requirements-tested.txt` (the revision set plus matplotlib). `uv.lock`
-is the submission-era resolution and is kept as a historical record, not as the recommended
-install path.
+- The current Figure 1 source is not distributed; scripts/33 produces an earlier alternative.
+- Figure regeneration via scripts/28 requires additional stored result inputs.
+- The main FAL-CUR comparisons have the D4 flag off; the separate exploratory D4 runs have
+  it on. D4 is outside the 514-comparison manifest. Raw p-values and nominal intervals must
+  be distinguished from any exploratory eight-outcome Holm calculation.
+- The DeepASD adapters are withheld because upstream redistribution permission was not
+  verified. The separate DeepASD reference analyses are outside this core package. The
+  FAIR-AL acquisition experiments represented by this package use the sklearn backend.
+- The historical lock and revision tested requirements identify different environments;
+  ENVIRONMENTS.md explains them. requirements-tested.txt is the recommended revision setup.
