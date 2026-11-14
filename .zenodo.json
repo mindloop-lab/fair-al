@@ -52,13 +52,5 @@
     "autism spectrum disorder screening",
     "reproducibility"
   ],
-  "related_identifiers": [
-    {
-      "relation": "isSupplementTo",
-      "identifier": "CMPB-D-26-04362",
-      "resource_type": "publication-article",
-      "scheme": "other"
-    }
-  ],
-  "notes": "Code: Apache-2.0. The fourteen aggregate result CSVs distributed as a release asset: CC BY 4.0. ABIDE-derived feature tables are not redistributed. Source repository and release: https://github.com/mindloop-lab/fair-al/releases/tag/cmpb-rev1-v1.0.1"
+  "notes": "Code: Apache-2.0. The fourteen aggregate result CSVs distributed as a release asset: CC BY 4.0. ABIDE-derived feature tables are not redistributed. Manuscript CMPB-D-26-04362 (revision 1). Source repository and release: https://github.com/mindloop-lab/fair-al/releases/tag/cmpb-rev1-v1.0.1"
 }

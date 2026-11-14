@@ -90,5 +90,6 @@ ABIDE-derived feature table.
 
 ## Citation
 
-`CITATION.cff` carries title, authors, licence and version. Cite the article; no DOI is asserted
-here because none has been minted.
+Cite the archived software release at https://doi.org/10.5281/zenodo.24189798
+(version cmpb-rev1-v1.0.1). This is the software DOI, not an article DOI. The associated
+manuscript remains under review. `CITATION.cff` records the software and manuscript separately.

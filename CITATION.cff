@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "If you use this software, cite the associated article."
+message: "Please cite this archived software release and the associated manuscript where appropriate."
 type: software
 title: "FAIR-AL: reference implementation for auditing demographic query drift in feature-based ASD screening"
 abstract: >-
@@ -8,6 +8,7 @@ abstract: >-
   query drift in active learning over feature-based autism screening data; it contains no
   participant-level data. Python package version 0.8.0; release tag cmpb-rev1-v1.0.1.
 version: "cmpb-rev1-v1.0.1"
+doi: "10.5281/zenodo.24189798"
 date-released: "2026-11-13"
 repository-code: "https://github.com/mindloop-lab/fair-al"
 url: "https://github.com/mindloop-lab/fair-al"
